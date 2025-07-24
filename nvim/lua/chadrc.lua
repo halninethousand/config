@@ -6,7 +6,7 @@
 local M = {}
 
 M.base46 = {
-	theme = "chocolate",
+	theme = "onenord",
 
 	-- hl_override = {
 	-- 	Comment = { italic = true },
@@ -22,6 +22,7 @@ M.ui = {
 }
 -- vim.o.cmdheight = 1
 vim.o.shell = "/bin/fish"
+vim.api.nvim_set_option("clipboard", "unnamedplus")
 
 -- M.nvdash = { load_on_startup = true }
 -- M.ui = {

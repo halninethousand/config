@@ -30,11 +30,10 @@ return {
     "mrcjkb/rustaceanvim",
     ft = { "rust" },
     config = function()
-      local mason_registry = require('mason-registry')
-      local codelldb = mason_registry.get_package("codelldb")
-      local extension_path = codelldb:get_install_path() .. "/extension/"
-      local codelldb_path = extension_path .. "adapter/codelldb"
-      local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+      local mason_root = vim.fn.stdpath("data") .. "/mason/packages/codelldb"
+      local extension_path = mason_root .. "/extension/"
+      local adapter_path   = extension_path .. "adapter/codelldb"
+      local lib_path       = extension_path .. "lldb/lib/liblldb.so"
       local cfg = require('rustaceanvim.config')
       vim.g.rustaceanvim = {
         server = {
@@ -43,7 +42,7 @@ return {
           end,
         },
         dap = {
-          adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
+          adapter = cfg.get_codelldb_adapter(adapter_path, lib_path),
         },
       }
     end,
@@ -68,7 +67,7 @@ return {
   },
 
   {
-    'rcarriga/nvim-dap-ui',
+    'rcarriga/nvim-dap-ui', 
     dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"},
     config = function()
 			require("dapui").setup()
